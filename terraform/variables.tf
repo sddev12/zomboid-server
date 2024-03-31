@@ -17,6 +17,10 @@ variable "aws_ecr_url" {
   type = string
 }
 
+variable "container_name" {
+  type = string
+}
+
 variable "container_image_version" {
   type    = string
   default = "latest"
