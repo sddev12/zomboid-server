@@ -40,7 +40,7 @@ resource "aws_ecs_task_definition" "zomboid_server" {
 }
 
 # Create the ECS service
-resource "aws_ecs_service" "spitlog" {
+resource "aws_ecs_service" "zomboid_server" {
   name            = "splitlog"
   cluster         = aws_ecs_cluster.zomboid_server.id
   task_definition = aws_ecs_task_definition.zomboid_server.arn
@@ -50,6 +50,19 @@ resource "aws_ecs_service" "spitlog" {
   network_configuration {
     subnets = [aws_subnet.public.id]
   }
+
+  load_balancer {
+    target_group_arn = aws_lb_target_group.zomboid_server_16261.arn
+    container_name   = var.container_name
+    container_port   = 16261
+  }
+
+  load_balancer {
+    target_group_arn = aws_lb_target_group.zomboid_server_16262.arn
+    container_name   = var.container_name
+    container_port   = 16262
+  }
+
 
   tags = var.tags
 }
