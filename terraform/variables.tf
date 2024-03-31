@@ -3,6 +3,11 @@ variable "aws_region" {
   default = "eu-west-2"
 }
 
+variable "hosted_zone_name" {
+  type    = string
+  default = "rackam.ninja"
+}
+
 variable "task_cpu" {
   type    = number
   default = 1024
