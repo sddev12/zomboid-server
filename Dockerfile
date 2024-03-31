@@ -38,5 +38,3 @@ EXPOSE 16261/udp
 EXPOSE 16262/udp
 
 CMD ["bash", "/opt/pzserver/start-server.sh", "-adminpassword", "$(cat /run/secrets/PZ_SERVER_ADMIN_PASSWORD)"]
-
-# CMD ["tail", "-f", "/dev/null"]
