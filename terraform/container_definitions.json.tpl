@@ -1,6 +1,6 @@
 [
     {
-        "name": "zomboid-server",
+        "name": "${container_name}",
         "image": "${aws_ecr_url}:${tag}",
         "portMappings": [
             {
