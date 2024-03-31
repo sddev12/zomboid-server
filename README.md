@@ -3,6 +3,13 @@
 
 **This project is currently WIP**
 
+**Todo:**
+- Finish build/deploy actions workflow
+- Build Tear Down Workflow
+- Set up EFS for Docker volume in Terraform
+- Test Terraform and AWS Infra
+
+
 ## Overview
 This project provides a fully automated solution for deploying a dedicated [Project Zomboid](https://pzwiki.net/wiki/Dedicated_server) server to AWS
 
