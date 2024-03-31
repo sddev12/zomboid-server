@@ -2,6 +2,9 @@ name: Deploy Zomboid Server
 on:
   workflow_dispatch:
 
+env:
+  PZ_SERVER_ADMIN_PASSWORD: ${{secrets.PZ_SERVER_ADMIN_PASSWORD}}
+
 jobs:
   Build:
     runs-on: ubuntu-latest
@@ -15,4 +18,15 @@ jobs:
         id: short-sha
         with:
           length: 7
-      - run: echo Short SHA - ${{steps.short-sha.outputs.SHA}}
+      - run: echo Short SHA - ${{steps.short-sha.outputs.sha}}
+
+      - name: Build Docker Image
+        run: docker build --secret id=PZ_SERVER_ADMIN_PASSWORD,env=${{env.PZ_SERVER_ADMIN_PASSWORD}} -t project-zomboid .
+
+      - name: Docker Login
+        run: docker login -u ${{vars.DOCKERHUB_USERNAME}} -p ${{secrets.DOCKERHUB_PASSWORD}}
+
+      - name: Push Docker Image
+        run: docker push ${{vars.DOCKERHUB_USERNAME}}/${{vars.DOCKER_IMAGE_NAME}}:${{steps.short-sha.outputs.sha}}
+    outputs:
+      shortSHA: ${{steps.short-sha.outputs.sha}}
