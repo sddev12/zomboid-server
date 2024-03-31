@@ -19,6 +19,8 @@ resource "aws_lb_listener" "port_16261" {
     type             = "forward"
     target_group_arn = aws_lb_target_group.zomboid_server_16261.arn
   }
+
+  tags = var.tags
 }
 
 resource "aws_lb_listener" "port_16262" {
@@ -30,6 +32,8 @@ resource "aws_lb_listener" "port_16262" {
     type             = "forward"
     target_group_arn = aws_lb_target_group.zomboid_server_16262.arn
   }
+
+  tags = var.tags
 }
 
 resource "aws_lb_target_group" "zomboid_server_16261" {
@@ -37,6 +41,8 @@ resource "aws_lb_target_group" "zomboid_server_16261" {
   port     = 16261
   protocol = "UDP"
   vpc_id   = aws_vpc.zomboid_vpc.id
+
+  tags = var.tags
 }
 
 resource "aws_lb_target_group" "zomboid_server_16262" {
@@ -44,4 +50,6 @@ resource "aws_lb_target_group" "zomboid_server_16262" {
   port     = 16262
   protocol = "UDP"
   vpc_id   = aws_vpc.zomboid_vpc.id
+
+  tags = var.tags
 }

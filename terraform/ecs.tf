@@ -37,6 +37,8 @@ resource "aws_ecs_task_definition" "zomboid_server" {
   memory                   = var.task_memory
   requires_compatibilities = ["FARGATE"]
   container_definitions    = data.template_file.container-definition.rendered
+
+  tags = var.tags
 }
 
 # Create the ECS service
@@ -62,7 +64,6 @@ resource "aws_ecs_service" "zomboid_server" {
     container_name   = var.container_name
     container_port   = 16262
   }
-
 
   tags = var.tags
 }
