@@ -21,7 +21,7 @@ jobs:
       - run: echo Short SHA - ${{steps.short-sha.outputs.sha}}
 
       - name: Build Docker Image
-        run: docker build --secret id=PZ_SERVER_ADMIN_PASSWORD,env=${{env.PZ_SERVER_ADMIN_PASSWORD}} -t project-zomboid .
+        run: docker build --secret id=PZ_SERVER_ADMIN_PASSWORD,env=${{env.PZ_SERVER_ADMIN_PASSWORD}} -t ${{vars.DOCKERHUB_USERNAME}}/${{vars.DOCKER_IMAGE_NAME}}:${{steps.short-sha.outputs.sha}} .
 
       - name: Docker Login
         run: docker login -u ${{vars.DOCKERHUB_USERNAME}} -p ${{secrets.DOCKERHUB_PASSWORD}}
